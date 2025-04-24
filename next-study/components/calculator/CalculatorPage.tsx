@@ -5,7 +5,7 @@ import { NumberKey } from "./NumberKey";
 
 export function CalculatorPage() {
     const [isNumber, setIsNumber] = useState("");
-
+    const aaa = "aaaa";
     return (
 
         <div style={{ backgroundColor: "orange", width: "30%", height: "700px", position: 'absolute', zIndex: -1 }}>

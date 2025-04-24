@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useState, MouseEvent } from "react"
+import { useEffect, useState, MouseEvent, SetStateAction } from "react"
 type props = {
     isNumber: string;
-    setIsNumber: React.Dispatch<React.SetStateAction<string>>;
+    setIsNumber: React.Dispatch<SetStateAction<string>>;
 }
 
 export function NumberKey({ isNumber, setIsNumber }: props) {
@@ -14,22 +14,31 @@ export function NumberKey({ isNumber, setIsNumber }: props) {
 
         setIsNumber(prev => {
             if (Number(value) <= 9) {
-                data += value;
+                console.log(prev)
+
+                if (prev === '0') {
+                    return value;
+                }
                 return prev + value;
 
             } else if (value === "ac") {
                 return "";
 
             } else if (value === "=") {
-                console.log(">>>>>------------------------------->ddd>")
+                try {
+                    let prev2 = prev.replace("X", "*")
 
-                let tot = eval(prev)
-                console.log(">>>>>>ddd>", tot)
-                console.log("prev", prev)
-                return String(tot);
+                    let tot = eval(prev2)
+                    console.log(tot)
+                    return String(tot);
+
+                } catch (error) {
+                    return 'Nan'
+                }
+            } else if (value === "<=") {
+                return isNumber.replace(prev, "");
 
             } else {
-                data += value;
                 return prev + value;
 
             }
